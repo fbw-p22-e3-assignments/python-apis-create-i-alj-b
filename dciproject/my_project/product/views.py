@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Product
 from .serializers import ProductSerializer
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView
 
 # class UserList(generics.ListAPIView):
 #     queryset = User.objects.all()
@@ -12,6 +12,11 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView
 # Create your views here.
 
 class ProductCreateAPIView(CreateAPIView):
+    serializer_class = ProductSerializer
+
+class ProductDestroyAPIView(DestroyAPIView):
+    queryset = Product.objects.all()
+    lookup_field = 'product_name'
     serializer_class = ProductSerializer
 
 class ProductListAPIView(ListAPIView):
