@@ -1,5 +1,5 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 from .models import Product
 
 # Create your views here.
@@ -9,9 +9,9 @@ class ProductListView(ListView):
     template_name = 'product/product_list.html'
     context_object_name = 'products'
 
-class ProductFilteredListView(ListView):
-    context_object_name = 'products'
-    template_name = 'product/product_name_list.html'
+class ProductFilteredDetailView(DetailView):
+    context_object_name = 'product'
+    template_name = 'product/product_detail.html'
     # queryset = Product.objects.filter(product_name=self.kwargs['name'])
 
     def get_queryset(self):
