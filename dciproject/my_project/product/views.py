@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 
 # class UserList(generics.ListAPIView):
 #     queryset = User.objects.all()
@@ -12,11 +13,13 @@ from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView,
 
 class ProductCreateAPIView(CreateAPIView):
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProductDestroyAPIView(DestroyAPIView):
     queryset = Product.objects.all()
     lookup_field = 'product_name'
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
 
 class ProductListAPIView(ListAPIView):
     queryset = Product.objects.all()
@@ -26,3 +29,4 @@ class ProductRetrieveAPIView(RetrieveAPIView):
     queryset = Product.objects.all()
     lookup_field = 'product_name'
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
